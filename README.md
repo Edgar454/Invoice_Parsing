@@ -15,4 +15,4 @@ This repository serves as an end-to-end scalable solution for parsing receipts. 
 
 
 ## Architecture 
-![Alt text](Sans-titre-2024-07-05-1027.png)
+![Alt text](architecture.png)
