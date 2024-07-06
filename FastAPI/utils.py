@@ -1,5 +1,6 @@
 import re
 import torch
+device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
 # Function to process an image and to return the OCR
 def process_image(image , model , processor, d_type = torch.float32):
@@ -12,7 +13,8 @@ def process_image(image , model , processor, d_type = torch.float32):
     
     task_prompt = "<s_cord-v2>"
     decoder_input_ids = processor.tokenizer(task_prompt, add_special_tokens=False, return_tensors="pt").input_ids
-
+    
+    image = image.convert('RGB')
     pixel_values = processor(image, return_tensors="pt").pixel_values
 
     outputs = model.generate(
