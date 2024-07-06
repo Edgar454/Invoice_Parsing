@@ -1,0 +1,7 @@
+transformers
+numpy
+torch
+uvicorn
+fastapi
+tensorflow
+pillow
