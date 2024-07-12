@@ -19,7 +19,7 @@ spec :
         spec:
             containers:
             - name: invoice-parser
-              image: edgar403/invoice_parser:v1
+              image: edgar403/invoice_parser:latest
               ports:
               - containerPort: 8000
     
