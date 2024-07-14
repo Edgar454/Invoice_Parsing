@@ -7,8 +7,6 @@ from transformers import DonutProcessor, VisionEncoderDecoderModel
 from utils import process_image
 from prometheus_fastapi_instrumentator import Instrumentator
 
-# Instrument the FastAPI app
-Instrumentator().instrument(app).expose(app)
 
 # Load the model and processor globally
 model = VisionEncoderDecoderModel.from_pretrained("Edgar404/donut-shivi-cheques_KD_320")
@@ -20,6 +18,9 @@ class InferenceResults(BaseModel):
 
 # Building the server
 app = FastAPI(title='Invoice parser')
+
+# Instrument the FastAPI app
+Instrumentator().instrument(app).expose(app)
 
 @app.get('/')
 def read_root():
