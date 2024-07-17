@@ -1,0 +1,35 @@
+{
+  "Workflows": [
+    {
+      "Path": null,
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Main.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "StrAmount&Sequence_7",
+        "StrBankName&Sequence_7",
+        "StrDate&Sequence_7",
+        "StrPayeeName&Sequence_7",
+        "LastRow&Sequence_7",
+        "dtResult&Sequence_1",
+        "dtInvoice&Sequence_1",
+        "ExcelResultPath&Sequence_1",
+        "InvoiceFolder&Sequence_1",
+        "HistoryExists&Sequence_1",
+        "HistoryContent&Sequence_1",
+        "Status_code&Sequence_7",
+        "Response&Sequence_7",
+        "JsonResponse&Sequence_7"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    }
+  ]
+}

@@ -1,32 +1,51 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: grafana_app
+  name: grafana-app
 spec:
-    selector:
-        matchLabels:
-            app: grafana_app
-    template:
-        metadata:
-            labels:
-                app: grafana_app
-        spec:
-            containers:
-            - name: grafana
-              image: grafana/grafana
-              ports:
-              - containerPort: 3000
- 
+  selector:
+    matchLabels:
+      app: grafana-app
+  template:
+    metadata:
+      labels:
+        app: grafana-app
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - name: grafana-config
+          mountPath: /etc/grafana/grafana.ini
+          subPath: grafana.ini
+        - name: grafana-datasources
+          mountPath: /etc/grafana/provisioning/datasources/datasources.yaml
+          subPath: datasources.yaml
+      volumes:
+      - name: grafana-config
+        configMap:
+          name: grafana-config
+          items:
+          - key: grafana.ini
+            path: grafana.ini
+      - name: grafana-datasources
+        configMap:
+          name: grafana-config
+          items:
+          - key: datasources.yaml
+            path: datasources.yaml
 ---
 apiVersion: v1
 kind: Service
 metadata:
-    name: grafana-service
+  name: grafana-service
 spec:
-    type: ClusterIP
-    selector:
-        app: grafana_app
-    ports:
-    - protocol: TCP
-      port: 3000
-      targetPort: 3000
+  type: ClusterIP
+  selector:
+    app: grafana-app
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000

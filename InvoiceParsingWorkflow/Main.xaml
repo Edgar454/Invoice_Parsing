@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="868.8,2521.6" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="868.8,3828.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -30,6 +30,21 @@
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>UiPath.Shared.Activities.Business</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Web</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Excel.Activities.Business</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -94,13 +109,37 @@
       <AssemblyReference>System.CodeDom</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Web</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Ceci est une séquence pour faire le traitement complet des reçus depuis un dossier les étapes de la séquence sont les suivantes:&#xD;&#xA;&#xD;&#xA;1) Ouverture du dossier contenant les reçus&#xD;&#xA;2)Vérification dans le dossier de la présence d'un fichier texte agissant comme historique&#xD;&#xA;3)Parcourir le dossier à la recherche de tous les fichiers *.jpg, *.png etc&#xD;&#xA;4) pour chaque fichier correspondant dans le dossier vérifier s'il se trouve dans le fichier historique , Sinon envoyez une requête HTTP au serveur kubernetes pour le traitement du reçu&#xD;&#xA;5) Une fois la réponse reçue , consigner la réponse dans un fichier excel" DisplayName="Sequence pour l'extraction des informations des reçues" sap:VirtualizedContainerService.HintSize="688,2456.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence sap2010:Annotation.AnnotationText="Ceci est une séquence pour faire le traitement complet des reçus depuis un dossier les étapes de la séquence sont les suivantes:&#xA;&#xA;1) Ouverture du dossier contenant les reçus&#xA;2)Vérification dans le dossier de la présence d'un fichier texte agissant comme historique&#xA;3)Vérification dans le dossier de la présence d'un fichier excel &#xA;3)Parcourir le dossier à la recherche de tous les fichiers *.jpg, *.png etc&#xA;4) pour chaque fichier correspondant dans le dossier vérifier s'il se trouve dans le fichier historique , Sinon envoyez une requête HTTP au serveur kubernetes pour le traitement du reçu&#xA;5) Une fois la réponse reçue , consigner la réponse dans un fichier excel" DisplayName="Sequence pour l'extraction des informations des reçues" sap:VirtualizedContainerService.HintSize="732.8,3764" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="InvoiceFolder" />
       <Variable x:TypeArguments="x:Boolean" Name="HistoryExists" />
       <Variable x:TypeArguments="x:String" Name="HistoryContent" />
+      <Variable x:TypeArguments="x:String" Name="ExcelResultPath">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">C:\Users\GLC\Documents\Invoice_Parsing\FastAPI\result.xlsx</Literal>
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="sd:DataTable" Name="dtInvoice" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtResult" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -108,9 +147,9 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:SelectFolder DisplayName="Rechercher le fichier des reçus" sap:VirtualizedContainerService.HintSize="625.6,112" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[InvoiceFolder]" />
-    <ui:FileExistsX DisplayName="Verifier l'existence du fichier historique" Exists="[HistoryExists]" sap:VirtualizedContainerService.HintSize="625.6,166.4" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[InvoiceFolder + &quot;/history.txt&quot;]" />
-    <If Condition="[Not HistoryExists]" DisplayName="Si le fichier historique n'existe pas " sap:VirtualizedContainerService.HintSize="625.6,722.4" sap2010:WorkflowViewState.IdRef="If_2">
+    <ui:SelectFolder DisplayName="Rechercher le fichier des reçus" sap:VirtualizedContainerService.HintSize="670.4,112" sap2010:WorkflowViewState.IdRef="SelectFolder_1" SelectedFolder="[InvoiceFolder]" />
+    <ui:FileExistsX DisplayName="Verifier l'existence du fichier historique" Exists="[HistoryExists]" sap:VirtualizedContainerService.HintSize="670.4,166.4" sap2010:WorkflowViewState.IdRef="FileExistsX_1" Path="[InvoiceFolder + &quot;/history.txt&quot;]" />
+    <If Condition="[Not HistoryExists]" DisplayName="Si le fichier historique n'existe pas " sap:VirtualizedContainerService.HintSize="670.4,722.4" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
         <Sequence DisplayName="Alors" sap:VirtualizedContainerService.HintSize="416,359.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
           <sap:WorkflowViewStateService.ViewState>
@@ -118,7 +157,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:CreateFile ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create File" sap:VirtualizedContainerService.HintSize="353.6,166.4" sap2010:WorkflowViewState.IdRef="CreateFile_1" Name="[InvoiceFolder +&quot;history.txt&quot;]" Path="[InvoiceFolder]" />
+          <ui:CreateFile ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Créer le fichier" sap:VirtualizedContainerService.HintSize="353.6,166.4" sap2010:WorkflowViewState.IdRef="CreateFile_1" Name="[InvoiceFolder +&quot;\history.txt&quot;]" Path="[InvoiceFolder]" />
           <ui:ReadTextFile File="{x:Null}" Content="[HistoryContent]" DisplayName="Lire l'historique" FileName="[InvoiceFolder + &quot;\history.txt&quot;]" sap:VirtualizedContainerService.HintSize="353.6,104" sap2010:WorkflowViewState.IdRef="ReadTextFile_2" />
         </Sequence>
       </If.Then>
@@ -133,7 +172,10 @@
         </Sequence>
       </If.Else>
     </If>
-    <ui:ForEachFileX sap2010:Annotation.AnnotationText="Boucle for pour effectuer l'extraction proprement dite:&#xD;&#xA;1)Lecture du fichier &#xD;&#xA;2) S'il est dans l'historique , passer&#xD;&#xA;3) Sinon , Envoyer une requête au pod invoice parser&#xD;&#xA;4) Enregistrer la réponse dans un fichier excel" DisplayName="Pour chaque fichier dans le dossier des reçus" Filter="*jpg" Folder="[InvoiceFolder]" sap:VirtualizedContainerService.HintSize="625.6,1211.2" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtResult]" DisplayName="Lire la feuille 1 du fichier" sap:VirtualizedContainerService.HintSize="670.4,120" sap2010:WorkflowViewState.IdRef="ReadRange_5" SheetName="Sheet1" WorkbookPath="[ExcelResultPath]" />
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[dtInvoice]" DisplayName="Lire la feuille 1 du fichier" sap:VirtualizedContainerService.HintSize="670.4,120" sap2010:WorkflowViewState.IdRef="ReadRange_6" SheetName="Sheet1" WorkbookPath="[ExcelResultPath]" />
+    <ui:ClearDataTable DataTable="[dtResult]" DisplayName="Clear Data Table" sap:VirtualizedContainerService.HintSize="670.4,112.8" sap2010:WorkflowViewState.IdRef="ClearDataTable_3" />
+    <ui:ForEachFileX sap2010:Annotation.AnnotationText="Boucle for pour effectuer l'extraction proprement dite:&#xA;1)Lecture du fichier &#xA;2) S'il est dans l'historique , passer&#xA;3) Sinon , Envoyer une requête au pod invoice parser&#xA;4) Enregistrer la réponse dans un fichier excel" DisplayName="Pour chaque fichier dans le dossier des reçus" Filter="*jpg" Folder="[InvoiceFolder]" sap:VirtualizedContainerService.HintSize="670.4,2026.4" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
       <ui:ForEachFileX.Body>
         <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
           <ActivityAction.Argument1>
@@ -142,25 +184,98 @@
           <ActivityAction.Argument2>
             <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
           </ActivityAction.Argument2>
-          <Sequence DisplayName="Faire" sap:VirtualizedContainerService.HintSize="592,832.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="x:Boolean" Name="HistoryExists" />
-            </Sequence.Variables>
+          <Sequence DisplayName="Faire" sap:VirtualizedContainerService.HintSize="636.8,1639.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="529.6,117.6" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Fichier&quot;+ Invoice.ToString]" />
-            <If Condition="[Not HistoryContent.Contains(Invoice.Name)]" sap:VirtualizedContainerService.HintSize="529.6,626.4" sap2010:WorkflowViewState.IdRef="If_4">
+            <If Condition="[Not HistoryContent.Contains(Invoice.Name)]" DisplayName="Si un reçu n'est pas dans l'historique" sap:VirtualizedContainerService.HintSize="574.4,1550.4" sap2010:WorkflowViewState.IdRef="If_4">
               <If.Then>
-                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="496,360" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <Sequence DisplayName="Alors" sap:VirtualizedContainerService.HintSize="540.8,1284" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="x:Int32" Name="Status_code" />
+                    <Variable x:TypeArguments="x:String" Name="Response" />
+                    <Variable x:TypeArguments="njl:JObject" Name="JsonResponse" />
+                    <Variable x:TypeArguments="x:Int32" Name="LastRow" />
+                    <Variable x:TypeArguments="x:String" Name="StrPayeeName" />
+                    <Variable x:TypeArguments="x:String" Name="StrDate" />
+                    <Variable x:TypeArguments="x:String" Name="StrBankName" />
+                    <Variable x:TypeArguments="x:String" Name="StrAmount" />
+                  </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <ui:HttpClient Body="{x:Null}" ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" BodyFormat="multipart/form-data" DisplayName="HTTP Request à notre application web" EnableSSLVerification="True" EndPoint="http://localhost:8000/predict" sap:VirtualizedContainerService.HintSize="478.4,103.2" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Result="[Response]" StatusCode="[Status_code]" TimeoutMS="12000">
+                    <ui:HttpClient.Attachments>
+                      <InArgument x:TypeArguments="x:String" x:Key="file">[InvoiceFolder + "\"+ Invoice.Name]</InArgument>
+                    </ui:HttpClient.Attachments>
+                    <ui:HttpClient.Cookies>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                    </ui:HttpClient.Cookies>
+                    <ui:HttpClient.Headers>
+                      <InArgument x:TypeArguments="x:String" x:Key="accept">application/json</InArgument>
+                      <InArgument x:TypeArguments="x:String" x:Key="Content-Type">multipart/form-data</InArgument>
+                    </ui:HttpClient.Headers>
+                    <ui:HttpClient.Parameters>
+                      <InArgument x:TypeArguments="x:String" x:Key="Parameters">POST</InArgument>
+                    </ui:HttpClient.Parameters>
+                    <ui:HttpClient.UrlSegments>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                    </ui:HttpClient.UrlSegments>
+                  </ui:HttpClient>
+                  <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="478.4,122.4" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[JsonResponse]" JsonString="[Response]" />
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,242.4" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[StrPayeeName]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[JsonResponse.SelectToken("prediction.payee_name").ToString]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[StrDate]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[JsonResponse.SelectToken("prediction.date").ToString]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[StrBankName]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[JsonResponse.SelectToken("prediction.bank_name").ToString]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[StrAmount]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[JsonResponse.SelectToken("prediction.amt_in_figures").ToString]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                  </ui:MultipleAssign>
+                  <ui:AddDataRow ArrayRow="{x:Null}" DataRow="[dtResult.Rows.Add(LastRow.ToString(), StrPayeeName, StrDate, StrBankName, StrAmount)]" DataTable="[dtResult]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="478.4,220" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="478.4,122.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[JsonResponse.SelectToken(&quot;prediction.payee_name&quot;).ToString]" />
+                  <Assign sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[LastRow]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[dtResult.Rows.Count + 1]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap:VirtualizedContainerService.HintSize="478.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:String">[HistoryContent]</OutArgument>
                     </Assign.To>
@@ -168,11 +283,11 @@
                       <InArgument x:TypeArguments="x:String">[HistoryContent +vbCrLf+ Invoice.Name]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="[InvoiceFolder +&quot;\history.txt&quot;]" sap:VirtualizedContainerService.HintSize="433.6,157.6" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[HistoryContent]" />
+                  <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="[InvoiceFolder +&quot;\history.txt&quot;]" sap:VirtualizedContainerService.HintSize="478.4,157.6" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="[HistoryContent]" />
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                <Sequence DisplayName="Sinon (Passer)" sap:VirtualizedContainerService.HintSize="416,104.8" sap2010:WorkflowViewState.IdRef="Sequence_8">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -190,5 +305,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachFileX>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="True" DataTable="[dtResult]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="670.4,139.2" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Sheet2" WorkbookPath="[ExcelResultPath]" />
   </Sequence>
 </Activity>

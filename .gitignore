@@ -2,3 +2,5 @@
 _pycache_
 .ipynb_checkpoints
 shivi.jpg
+*.txt
+*.xlsx
