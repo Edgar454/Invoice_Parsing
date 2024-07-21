@@ -6,3 +6,5 @@ fastapi
 tensorflow
 pillow
 prometheus-fastapi-instrumentator
+prometheus_client
+psutil
