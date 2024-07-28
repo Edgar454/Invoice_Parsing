@@ -41,20 +41,15 @@ Instrumentator().instrument(app).expose(app)
 async def prometheus_middleware(request, call_next):
     REQUEST_COUNT.inc()
     start_time = time.time()
-    try:
-        response = await call_next(request)
-        if response.status_code == 200:
-            SUCCESSFUL_REQUEST_COUNT.inc()
-        else:
-            UNSUCCESSFUL_REQUEST_COUNT.inc()
-        return response
-    except Exception as e:
+    response = await call_next(request)
+    elapsed_time = time.time() - start_time
+    INFERENCE_TIME.observe(elapsed_time)
+    CPU_USAGE.set(get_cpu_usage())
+    if response.status_code == 200:
+        SUCCESSFUL_REQUEST_COUNT.inc()
+    else:
         UNSUCCESSFUL_REQUEST_COUNT.inc()
-        raise e
-    finally:
-        elapsed_time = time.time() - start_time
-        INFERENCE_TIME.observe(elapsed_time)
-        CPU_USAGE.set(get_cpu_usage())
+    return response
 
 @app.get('/')
 def read_root():
@@ -76,9 +71,7 @@ async def get_prediction(file: UploadFile = File(...)):
     start_time = time.time()
     try:
         prediction = process_image(image, model, processor, torch.float32)
-        SUCCESSFUL_REQUEST_COUNT.inc()
     except Exception as e:
-        UNSUCCESSFUL_REQUEST_COUNT.inc()
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         elapsed_time = time.time() - start_time
@@ -88,4 +81,4 @@ async def get_prediction(file: UploadFile = File(...)):
     return InferenceResults(prediction=prediction)
     
 if __name__ == "__main__":
-    uvicorn.run(app, host='127.0.0.1', port=8000)
+    uvicorn.run(app, host='0.0.0.0', port=8000)

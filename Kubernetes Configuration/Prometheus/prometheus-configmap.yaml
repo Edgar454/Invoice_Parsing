@@ -10,8 +10,7 @@ data:
     scrape_configs:
       - job_name: 'invoice-parser'
         static_configs:
-          - targets: ['invoice-parser:8000']
-
+          - targets: ['invoice-parser-service:8000']
       - job_name: 'invoice-parser-metrics'
         static_configs:
-          - targets: ['invoice-parser:8001']
+          - targets: ['invoice-parser-service:8001']
